@@ -2,20 +2,23 @@ import React, { useState } from "react";
 import { loginUser } from "../../services/auth";
 import OutlinedInput from "../../components/inputs/outlinedInput";
 import FilledButton from "../../components/buttons/filledButton";
-// import redirectUserOnLogin from "../../utils/auth";
 import { useNavigate } from "react-router-dom";
+import { updateUser } from "../../store/slices/user";
+import { useDispatch } from "react-redux";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleSubmit = (email, password) => {
     setLoading(true);
     loginUser(email, password)
       .then((user) => {
         setLoading(false);
+        dispatch(updateUser({ ...user, isAuthenticated: true }));
         const userRole = user.role;
         if (userRole == "superadmin") {
           navigate("/super-admin-dashboard");
