@@ -5,6 +5,7 @@ import FilledButton from "../../components/buttons/filledButton";
 import { useNavigate } from "react-router-dom";
 import { updateUser } from "../../store/slices/user";
 import { useDispatch } from "react-redux";
+import { getPath } from "../../utils/getPath";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -20,21 +21,12 @@ function Login() {
         setLoading(false);
         dispatch(updateUser({ ...user, isAuthenticated: true }));
         const userRole = user.role;
-        if (userRole == "superadmin") {
-          navigate("/super-admin-dashboard");
-        }
-
-        if (userRole == "admin") {
-          navigate("/admin-dashboard");
-        }
-
-        if (userRole == "user") {
-          navigate("/user-dashboard");
-        }
+        navigate(getPath(userRole));
         console.log("Logged in:", user);
       })
       .catch((error) => {
         setLoading(false);
+        alert("user not found");
         console.error("Login failed:", error.message);
       });
   };
@@ -65,6 +57,14 @@ function Login() {
           label={loading ? "Please wait..." : "Submit"}
           onClick={() => handleSubmit(email, password)}
         />
+      </div>
+      <div className="w-full md:max-w-[400px] p-4 flex flex-col gap-2 text-sm text-[#fd00005c]">
+        <p>Credentials:</p>
+        <ul>
+          <li>Super Admin: Email - rajkamalnehul@gmail.com | Pass- mango</li>
+          <li>Admin: Email - desmithjhon@gmail.com | Pass- mango</li>
+          <li>User: Email - nehul@gmail.com | Pass- mango</li>
+        </ul>
       </div>
     </div>
   );

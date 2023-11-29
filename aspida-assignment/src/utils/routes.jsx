@@ -1,5 +1,6 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
+import { getPath } from "./getPath";
 
 // Function to create private routes
 export const createPrivateRoute = (path, element, allowedRoles, user) => {
@@ -11,6 +12,8 @@ export const createPrivateRoute = (path, element, allowedRoles, user) => {
     element:
       isAuthenticated && allowedRoles.includes(userRole) ? (
         element
+      ) : isAuthenticated ? (
+        <Navigate to={getPath(userRole)} replace={true} />
       ) : (
         <Navigate to={"/"} replace={true} />
       ),

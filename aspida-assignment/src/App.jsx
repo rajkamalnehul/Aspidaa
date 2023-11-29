@@ -24,7 +24,7 @@ function App() {
     createPrivateRoute("/admin-dashboard", <AdminDashboard />, ["admin"], user),
     createPrivateRoute("/user-dashboard", <UserDashboard />, ["user"], user),
   ]);
-
+  console.log(router);
   return <RouterProvider router={router} />;
 }
 
