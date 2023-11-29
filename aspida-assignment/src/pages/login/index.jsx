@@ -26,6 +26,7 @@ function Login() {
       })
       .catch((error) => {
         setLoading(false);
+        alert("user not found");
         console.error("Login failed:", error.message);
       });
   };
@@ -56,6 +57,14 @@ function Login() {
           label={loading ? "Please wait..." : "Submit"}
           onClick={() => handleSubmit(email, password)}
         />
+      </div>
+      <div className="w-full md:max-w-[400px] p-4 flex flex-col gap-2 text-sm text-[#fd00005c]">
+        <p>Credentials:</p>
+        <ul>
+          <li>Super Admin: Email - rajkamalnehul@gmail.com | Pass- mango</li>
+          <li>Admin: Email - desmithjhon@gmail.com | Pass- mango</li>
+          <li>User: Email - nehul@gmail.com | Pass- mango</li>
+        </ul>
       </div>
     </div>
   );
