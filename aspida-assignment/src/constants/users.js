@@ -14,13 +14,13 @@ export const USER_LIST = [
   {
     name: "Desmith Jhon",
     role: "admin",
-    email: "rajkamalnehul@gmail.com",
+    email: "desmithjhon@gmail.com",
     password: "mango",
   },
   {
     name: "Josh",
     role: "user",
-    email: "rajkamalnehul@gmail.com",
+    email: "josh@gmail.com",
     password: "mango",
   },
   {

@@ -2,17 +2,32 @@ import React, { useState } from "react";
 import { loginUser } from "../../services/auth";
 import OutlinedInput from "../../components/inputs/outlinedInput";
 import FilledButton from "../../components/buttons/filledButton";
+// import redirectUserOnLogin from "../../utils/auth";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = (email, password) => {
     setLoading(true);
     loginUser(email, password)
       .then((user) => {
         setLoading(false);
+        const userRole = user.role;
+        if (userRole == "superadmin") {
+          navigate("/super-admin-dashboard");
+        }
+
+        if (userRole == "admin") {
+          navigate("/admin-dashboard");
+        }
+
+        if (userRole == "user") {
+          navigate("/user-dashboard");
+        }
         console.log("Logged in:", user);
       })
       .catch((error) => {
