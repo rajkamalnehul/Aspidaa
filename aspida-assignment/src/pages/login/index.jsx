@@ -5,6 +5,7 @@ import FilledButton from "../../components/buttons/filledButton";
 import { useNavigate } from "react-router-dom";
 import { updateUser } from "../../store/slices/user";
 import { useDispatch } from "react-redux";
+import { getPath } from "../../utils/getPath";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -20,17 +21,7 @@ function Login() {
         setLoading(false);
         dispatch(updateUser({ ...user, isAuthenticated: true }));
         const userRole = user.role;
-        if (userRole == "superadmin") {
-          navigate("/super-admin-dashboard");
-        }
-
-        if (userRole == "admin") {
-          navigate("/admin-dashboard");
-        }
-
-        if (userRole == "user") {
-          navigate("/user-dashboard");
-        }
+        navigate(getPath(userRole));
         console.log("Logged in:", user);
       })
       .catch((error) => {
