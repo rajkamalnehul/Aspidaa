@@ -13,9 +13,15 @@ export const createPrivateRoute = (path, element, allowedRoles, user) => {
       isAuthenticated && allowedRoles.includes(userRole) ? (
         element
       ) : isAuthenticated ? (
-        <Navigate to={getPath(userRole)} replace={true} />
+        <>
+          {console.log("Navigate to user role")}
+          <Navigate to={getPath(userRole)} replace={true} />
+        </>
       ) : (
-        <Navigate to={"/"} replace={true} />
+        <>
+          {console.log("Navigate to login")}
+          <Navigate to={"/"} replace={true} />
+        </>
       ),
   };
 };
